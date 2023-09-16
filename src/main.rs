@@ -4,8 +4,8 @@ use std::{
 };
 
 fn handle_connection(mut stream: TcpStream) {
-    let mut buf = String::new();
-    stream.read_to_string(&mut buf).unwrap();
+    let mut buf: [u8; 256] = [0; 256];
+    stream.read(&mut buf).unwrap();
     stream.write_all(b"+PONG\r\n").unwrap();
     stream.flush().unwrap();
 }
